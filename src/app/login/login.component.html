@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Material+Symbols+Sharp:opsz,wght,FILL,GRAD@48,400,0,0"
+    />
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Material+Symbols+Sharp:opsz,wght,FILL,GRAD@48,400,0,0"
+    />
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@48,400,0,0"
+    />
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@48,400,0,0"
+    />
+    <title>LogIn</title>
+  </head>
+  <body>
+    <div class="header">
+      <div class="container">
+        <h1>NOKIA</h1>
+        <h2>FACILIVISS</h2>
+        <form class="form" [formGroup]="loginForm" (ngSubmit)="(onSubmit)">
+          <div class="user-box form-group">
+            <span class="material-symbols-sharp acc-circle">
+              account_circle
+            </span>
+            <input
+              type="text"
+              id="Email"
+              class="form-control Email"
+              formControlName="Email"
+            />
+            <label>Email</label>
+            <div
+              *ngIf="
+                !loginForm.get('Email')?.valid &&
+                loginForm.get('Email')?.touched
+              "
+              class="invalid-feedback span"
+            >
+              Please Enter a Valid Email
+            </div>
+          </div>
+          <div class="user-box form-group example-container">
+            <span class="material-symbols-sharp lock-icon"> lock </span>
+            <input
+              matInput
+              formControlName="Password"
+              [type]="hide ? 'password' : 'text'"
+            />
+            <label>Password</label>
+            <span
+              class="material-symbols-outlined eye-icon"
+              (click)="hide = !hide"
+            >
+              {{ hide ? "visibility" : "visibility_off" }}
+            </span>
+            <div
+              *ngIf="
+                !loginForm.get('Password')?.valid &&
+                loginForm.get('Password')?.touched
+              "
+              class="invalid-feedback span"
+            >
+              Password should be minimum 6 characters
+            </div>
+          </div>
+          <div class="forgot">
+            <p>Forgot Password ?</p>
+          </div>
+          <div>
+            <button
+              type="submit"
+              class="btn"
+              [disabled]="!loginForm.valid"
+              (click)="onClick()"
+            >
+              Submit
+            </button>
+          </div>
+        </form>
+      </div>
+    </div>
+    <div
+      class="backdrop"
+      [ngStyle]="{ display: displayStyle }"
+      (click)="onClose()"
+    ></div>
+    <div class="data-box" [ngStyle]="{ display: displayStyle }">
+      <h1>Success!</h1>
+      <button class="btn" (click)="onDataClose()">Close</button>
+    </div>
+  </body>
+</html>
